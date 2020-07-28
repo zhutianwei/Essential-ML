@@ -280,11 +280,6 @@ next(a)
 
 
 ```python
-
-```
-
-
-```python
 for element in iterable:
     # do something with element
     
@@ -303,6 +298,27 @@ while True:
         # if StopIteration is raised, break from loop
         break
 ```
+
+An interesting (and somewhat obscure) feature of Python is being able to attach an else block to a loop. The basic idea is that the code in the else block runs only if the loop completes without encountering a break statement
+
+
+```python
+for i in range(3):
+    password = input('Enter password: ')
+    if password == 'secret':
+        print('You guessed the password!')
+        break
+else:
+    print('3 incorrect password attempts')
+```
+
+    Enter password:  s
+    Enter password:  s
+    Enter password:  s
+
+
+    3 incorrect password attempts
+
 
 ## 操作符
 https://www.programiz.com/python-programming/operators/1
@@ -530,7 +546,7 @@ print(f'{name} is {age} years old.')
 
 
 ```python
-print('hello world\nss',2,sep='\n')
+print('hello world\nss', 2, sep='\n')
 ```
 
     hello world
@@ -544,7 +560,7 @@ x = 'spam'
 y = 99
 z = ['eggs']
 print(x, y, z)
-print(x,y,z,sep = '\n')
+print(x, y, z, sep = '\n')
 ```
 
     spam 99 ['eggs']
@@ -610,6 +626,9 @@ result = list(map(lambda n1, n2: n1+n2, num1, num2))
 print(result)
 ```
 
+    [9, 11, 13]
+
+
 
 ```python
 # zip(*iterables)
@@ -622,15 +641,21 @@ zip()
 ```python
 arr1=[1, 2, 3, 4, 5]
 
-reduce(lambda x, y: x+y, arr1)￼
+reduce(lambda x, y: x+y, arr1)
 ```
 
 
-      File "<ipython-input-3-9e42fdc573bd>", line 3
-        reduce(lambda x, y: x+y, arr1)￼
-                                      ^
-    SyntaxError: invalid character in identifier
+    ---------------------------------------------------------------------------
 
+    NameError                                 Traceback (most recent call last)
+
+    <ipython-input-3-ba90527eb706> in <module>
+          1 arr1=[1, 2, 3, 4, 5]
+          2 
+    ----> 3 reduce(lambda x, y: x+y, arr1)
+    
+
+    NameError: name 'reduce' is not defined
 
 
 
@@ -723,11 +748,18 @@ print(double(5))
 
 
 ```python
-def function(x, y = 1, z = 2):
+def function(x, y = 1, z = 2): # default argument must behind non-default argument
     return x + y + z
 
 function(x=3, z=5)
 ```
+
+
+
+
+    9
+
+
 
 
 ```python
@@ -796,6 +828,9 @@ obj.solution()
 
 ```python
 class Parrot:
+    """
+    hello
+    """
     a = 10
     # instance attributes
     def __init__(self, name, age):
@@ -816,7 +851,26 @@ blu = Parrot("Blu", 10)
 print(blu.sing("'Happy'"))
 print(blu.dance())
 blu
+blu.__doc__
 ```
+
+    Blu sings 'Happy'
+    Blu is now dancing
+
+
+
+
+
+    <__main__.Parrot at 0x7f890759e880>
+
+
+
+
+
+
+    '\n    hello\n    '
+
+
 
 
 ```python
@@ -1641,6 +1695,11 @@ print(reciprocal(10))
 print(reciprocal(0))
 ```
 
+    0.1
+    Exception caught
+    None
+
+
 
 ```python
 try:
@@ -1769,7 +1828,7 @@ assert sum([1, 2, 3]) == 5, "Should be 6"
 
     AssertionError                            Traceback (most recent call last)
 
-    <ipython-input-23-670dd62afbd7> in <module>
+    <ipython-input-12-670dd62afbd7> in <module>
     ----> 1 assert sum([1, 2, 3]) == 5, "Should be 6"
     
 
@@ -1788,33 +1847,42 @@ class TestSum(unittest.TestCase):
     def test_sum_tuple(self):
         self.assertEqual(sum((1, 2, 2)), 6, "Should be 6")
 
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+# unittest.main()
+unittest.main(argv=['first-arg-is-ignored'], exit=False)
 ```
 
-    E
+    F...F
     ======================================================================
-    ERROR: /Users/zhutianwei/Library/Jupyter/runtime/kernel-862f6da8-5d5b-4113-bdde-7f1aabe5ccef (unittest.loader._FailedTest)
+    FAIL: test_float (__main__.TestDivision)
     ----------------------------------------------------------------------
-    AttributeError: module '__main__' has no attribute '/Users/zhutianwei/Library/Jupyter/runtime/kernel-862f6da8-5d5b-4113-bdde-7f1aabe5ccef'
+    Traceback (most recent call last):
+      File "<ipython-input-10-c5d43ca86633>", line 14, in test_float
+        self.assertEqual(division_funtion(4.2, 3), 1.4)
+    AssertionError: 1.4000000000000001 != 1.4
+    
+    ======================================================================
+    FAIL: test_sum_tuple (__main__.TestSum)
+    ----------------------------------------------------------------------
+    Traceback (most recent call last):
+      File "<ipython-input-14-b6758e2b821d>", line 9, in test_sum_tuple
+        self.assertEqual(sum((1, 2, 2)), 6, "Should be 6")
+    AssertionError: 5 != 6 : Should be 6
     
     ----------------------------------------------------------------------
-    Ran 1 test in 0.004s
+    Ran 5 tests in 0.007s
     
-    FAILED (errors=1)
+    FAILED (failures=2)
 
 
 
-    An exception has occurred, use %tb to see the full traceback.
 
 
-    SystemExit: True
+    <unittest.main.TestProgram at 0x7f7f9d1a88e0>
 
 
 
-    /Users/zhutianwei/anaconda/envs/IntroToTensorFlow/lib/python3.6/site-packages/IPython/core/interactiveshell.py:3304: UserWarning: To exit: use 'exit', 'quit', or Ctrl-D.
-      warn("To exit: use 'exit', 'quit', or Ctrl-D.", stacklevel=1)
-
+https://stackoverflow.com/questions/37895781/unable-to-run-unittests-main-function-in-ipython-jupyter-notebook/38012249#38012249
 
 
 ```python
@@ -1839,12 +1907,12 @@ if __name__ == '__main__':
 
     E
     ======================================================================
-    ERROR: /Users/zhutianwei/Library/Jupyter/runtime/kernel-862f6da8-5d5b-4113-bdde-7f1aabe5ccef (unittest.loader._FailedTest)
+    ERROR: /Users/zhutianwei/Library/Jupyter/runtime/kernel-161f2563-3832-493a-b78f-89a1c997a183 (unittest.loader._FailedTest)
     ----------------------------------------------------------------------
-    AttributeError: module '__main__' has no attribute '/Users/zhutianwei/Library/Jupyter/runtime/kernel-862f6da8-5d5b-4113-bdde-7f1aabe5ccef'
+    AttributeError: module '__main__' has no attribute '/Users/zhutianwei/Library/Jupyter/runtime/kernel-161f2563-3832-493a-b78f-89a1c997a183'
     
     ----------------------------------------------------------------------
-    Ran 1 test in 0.001s
+    Ran 1 test in 0.002s
     
     FAILED (errors=1)
 
@@ -1857,7 +1925,7 @@ if __name__ == '__main__':
 
 
 
-    /Users/zhutianwei/anaconda/envs/IntroToTensorFlow/lib/python3.6/site-packages/IPython/core/interactiveshell.py:3304: UserWarning: To exit: use 'exit', 'quit', or Ctrl-D.
+    /Users/zhutianwei/anaconda3/envs/random/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3339: UserWarning: To exit: use 'exit', 'quit', or Ctrl-D.
       warn("To exit: use 'exit', 'quit', or Ctrl-D.", stacklevel=1)
 
 

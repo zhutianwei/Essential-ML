@@ -80,6 +80,69 @@ platform.python_version()
 
 ## 所有数据结构都是关于创造 相互转换 增删查改
 
+
+```python
+number operations +,=,*,/,//,%,**. &,|,^,~,<<,>> 
+logic operations ==,>,<, is, in
+				 and, or, not
+```
+
+~ means revert every bit.  
+Therefore, ~x means -x-1.  
+An elegant (but confusing) way to choose the rightest element of the middle part.
+
+
+```python
+s // 10, s % 10
+```
+
+
+```python
+s = 4
+s >>= 1 # // 2
+s
+
+s & 1 == s % 2
+
+d = 4
+d <<= 1 # * 2
+d
+```
+
+
+
+
+    2
+    8
+
+
+
+如果把 n 以二进制的形式展示的话，其实我们只需要判断最后一个二进制位是 1 还是 0 就行了，如果是 1 的话，代表是奇数，如果是 0 则代表是偶数，所以采用位运算的方式的话，
+
+
+```python
+2 and 4
+```
+
+
+
+
+    4
+
+
+
+
+```python
+2 or 4
+```
+
+
+
+
+    2
+
+
+
 ## Numbers
 
 
@@ -240,6 +303,13 @@ max(-inf, 10)
 
 
 ```python
+import sys
+_max = sys.maxsize
+_min = -sys.maxsize - 1
+```
+
+
+```python
 import math
 math.log10(100)
 ```
@@ -290,14 +360,26 @@ random.choice(array)
 
 
 
+
+```python
+s = '110'
+int(s)
+```
+
+
+
+
+    110
+
+
+
 ### Binary. Hexadecimal  
 see EE course
 
-1 byte = 8 bits = 0000 0000 = ff
-1 unsigned int = 4 byte = 32 bits   
+1 unsigned int = 4 byte = 32 bits = ffffffff            
+1 byte = 8 bits = 0000 0000 = ff 
 
-
-& | ^ << >>
+& | ^ ~ << >> 都是对二进制数进行运算
 
 
 ```python
@@ -895,6 +977,31 @@ arr
 
     ['cha', 'act', 'ers', 'r']
 
+
+
+
+```python
+s = "Let's go"
+d = 'Let\'s go'
+d
+```
+
+
+
+
+    "Let's go"
+
+
+
+
+```python
+s = '\nhello word\nhello word'
+print(s)
+```
+
+    
+    hello word
+    hello word
 
 
 ## List
@@ -1864,6 +1971,8 @@ for key, value in dic2.items():
     print(key, value)
     
 dic == dic2
+
+dic.most_common(2)
 ```
 
 
@@ -1898,6 +2007,13 @@ dic == dic2
 
 
     True
+
+
+
+
+
+
+    [('a', 3), ('l', 2)]
 
 
 
